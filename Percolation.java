@@ -18,8 +18,6 @@ public class Percolation {
 
     private void validate(int row, int col) {
 
-        //row = convertToZeroBased(row);
-        //col = convertToZeroBased(col);
 
         int max = this.grid.length;
 
@@ -89,7 +87,9 @@ public class Percolation {
 
     // creates n-by-n grid, with all sites initially blocked
     public Percolation(int n) {
-
+        if (n <= 0) {
+            throw new IllegalArgumentException("The constructor cannot have n less than 1");
+        }
 
         quick = new WeightedQuickUnionUF(n * n);
         this.grid = new int[n][n]; // [x][y]
@@ -193,7 +193,7 @@ public class Percolation {
         row = convertToZeroBased(row);
         col = convertToZeroBased(col);
 
-        //validate(row, col);
+        validate(row, col);
         if (isOpen[row][col]) {
             // a little optimization can be done by keeping track of full sites
             if (isFull[row][col]) {
@@ -231,7 +231,7 @@ public class Percolation {
     public static void main(String[] args) {
 
 
-        Percolation percolation = new Percolation(4);
+ /*       Percolation percolation = new Percolation(4);
 
         //open(1, 1) and open(1, 2)
         percolation.open(1, 1);
@@ -241,26 +241,11 @@ public class Percolation {
 
         System.out.println("is 4 1 connected to virtual top? " + percolation.quick
                 .connected(12, percolation.virtualTop));
-        System.out.println("is 4 1 full? " + percolation.isFull(4, 1));
+        System.out.println("is 4 4 full? " + percolation.isFull(4, 4));
         System.out.println("does the system percolate? " + percolation.percolates());
         System.out.println("# of open sites " + percolation.numberOfOpenSites());
-        System.out.println("is 2 1 open?  " + percolation.isOpen(2, 1));
+        System.out.println("is 2 1 open?  " + percolation.isOpen(2, 1));*/
 
-       /*  percolation.open(2, 2);
-        percolation.open(3, 2);
-
-        int siteAsIndex = percolation.xyTo1D(0, 0);
-        int siteAsIndexTWO = percolation.xyTo1D(1, 1);
-        int siteAsIndexTHREE = percolation.xyTo1D(2, 2);
-        int siteAsIndexFOUR = percolation.xyTo1D(3, 2);
-        //int second = percolation.xyTo1D(0, 2);
-        System.out.println("is 3 2 connected to virtual top? " + percolation.quick
-                .connected(siteAsIndexFOUR, percolation.virtualTop));
-        System.out.println("if so it must be full, right? " + percolation.isFull(3, 2));
-
-        System.out.println("does the system percolate? " + percolation.percolates());
-        System.out.println("# of open sites " + percolation.numberOfOpenSites());
-        System.out.println("is 0 2 open?  " + percolation.isOpen(0, 2));*/
 
     }
 }
