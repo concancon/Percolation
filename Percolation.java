@@ -160,10 +160,15 @@ public class Percolation {
             quick.union(topNeighbor, siteAsIndex);
         }
 
+        int bottomCell = xyTo1D(row, col);
         if (isInBottomRow(row)) {
-            quick.union(virtualBottom, siteAsIndex);
+
+            if (quick.connected(bottomCell, virtualTop)) {
+                quick.union(virtualBottom, siteAsIndex);
+            }
+
         }
-        //if bottom if open
+        //if bottom is open
         else if (isOpen[row + 1][col]) {
             int bottomNeighbor = xyTo1D(row + 1, col);
             quick.union(bottomNeighbor, siteAsIndex);
